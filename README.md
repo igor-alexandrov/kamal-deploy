@@ -33,8 +33,8 @@ steps:
     uses: igor-alexandrov/kamal-deploy@v0.1.3
     with:
       # environment: 'staging'  # Optional, only used if provided
-      kamal-registry-username: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
-      kamal-registry-password: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
+      registry-username: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
+      registry-password: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       REDIS_URL: ${{ secrets.REDIS_URL }}
