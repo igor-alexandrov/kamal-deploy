@@ -6,15 +6,15 @@ Supports Kamal v2.0 and later.
 ## Inputs
 
 - **environment**: The environment to deploy to (e.g. staging, production).
-- **kamal-registry-username**: Registry username (Digital Ocean access token).
-- **kamal-registry-password**: Registry password (Digital Ocean access token).
+- **registry-username**: Registry username.
+- **registry-password**: Registry password.
 
 ## Usage
 
 ```yaml
 steps:
   - name: Kamal Deploy
-    uses: igor-alexandrov/kamal-deploy@v1
+    uses: igor-alexandrov/kamal-deploy@v0.1.2
     with:
       environment: 'staging'
       kamal-registry-username: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
