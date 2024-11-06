@@ -3,7 +3,7 @@ const exec = require('@actions/exec');
 
 async function run() {
   try {
-    const environment = core.getInput('environment', { required: true });
+    const environment = core.getInput('environment');
     const registryUsername = core.getInput('registry-username', { required: true });
     const registryPassword = core.getInput('registry-password', { required: true });
 
@@ -11,17 +11,32 @@ async function run() {
     core.exportVariable('KAMAL_REGISTRY_PASSWORD', registryPassword);
     core.exportVariable('DOCKER_BUILDKIT', 1);
 
+    // Build the deploy command args as an array
+    const deployCommand = ['deploy'];
+
+    // Add the `--destination` flag if environment is provided
+    if (environment) {
+      deployCommand.push(`--destination=${environment}`);
+    }
+
     // Execute the deployment command
-    await exec.exec('./bin/kamal', ['deploy', `--destination=${environment}`]);
+    await exec.exec('./bin/kamal', deployCommand);
 
     // Handle cancellation
     process.on('SIGINT', async () => {
       core.warning('Action canceled, releasing resources...');
       try {
-        await exec.exec('./bin/kamal', ['lock', 'release', `--destination=${environment}`]);
-        core.info('Resources released successfully.');
+        const lockCommand = ['lock', 'release'];
+
+        // Add the `--destination` flag if environment is provided
+        if (environment) {
+          lockCommand.push(`--destination=${environment}`);
+        }
+
+        await exec.exec('./bin/kamal', lockCommand);
+        core.info('Kamal lock released successfully.');
       } catch (error) {
-        core.setFailed(`Failed to release resources: ${error.message}`);
+        core.setFailed(`Failed to release Kamal lock: ${error.message}`);
       }
 
       process.exit(1); // Exit the process

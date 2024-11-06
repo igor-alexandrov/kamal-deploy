@@ -3,8 +3,8 @@ description: GitHub Action to build and deploy Docker image with Kamal
 color: 'blue'
 inputs:
   environment:
-    description: 'Application environment will be passed to Kamal as --destination flag'
-    required: true
+    description: 'Application environment, will be passed to Kamal as --destination flag'
+    required: false
   registry-username:
     description: 'Registry username'
     required: true
