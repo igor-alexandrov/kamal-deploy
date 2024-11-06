@@ -1,5 +1,5 @@
 name: Kamal Deploy
-description: GitHub Action to deploy Docker image with Kamal
+description: GitHub Action to build and deploy Docker image with Kamal
 inputs:
   environment:
     description: 'Application environment will be passed to Kamal as --destination flag'

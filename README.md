@@ -1,6 +1,7 @@
 # Kamal Deploy Action
 
-This GitHub Action deploys using Kamal
+This GitHub Action deploys using [Kamal](https://kamal-deploy.org/).
+Supports Kamal v2.0 and later.
 
 ## Inputs
 
