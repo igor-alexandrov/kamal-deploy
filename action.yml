@@ -1,0 +1,15 @@
+name: Kamal Deploy
+description: GitHub Action to deploy Docker image with Kamal
+inputs:
+  environment:
+    description: 'Application environment will be passed to Kamal as --destination flag'
+    required: true
+  registry-username:
+    description: 'Registry username'
+    required: true
+  registry-password:
+    description: 'Registry password'
+    required: true
+runs:
+  using: 'node20'
+  main: 'index.js'
