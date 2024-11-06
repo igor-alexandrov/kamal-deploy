@@ -4,7 +4,7 @@ This GitHub Action deploys using Kamal
 
 ## Inputs
 
-- **environment**: The environment to deploy to.
+- **environment**: The environment to deploy to (e.g. staging, production).
 - **kamal-registry-username**: Registry username (Digital Ocean access token).
 - **kamal-registry-password**: Registry password (Digital Ocean access token).
 
@@ -13,7 +13,7 @@ This GitHub Action deploys using Kamal
 ```yaml
 steps:
   - name: Kamal Deploy
-    uses: your-username/kamal-deploy-action@v1
+    uses: igor-alexandrov/kamal-deploy@v1
     with:
       environment: 'staging'
       kamal-registry-username: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
