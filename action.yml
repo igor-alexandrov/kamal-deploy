@@ -1,5 +1,6 @@
 name: Kamal Deploy
 description: GitHub Action to build and deploy Docker image with Kamal
+color: 'blue'
 inputs:
   environment:
     description: 'Application environment will be passed to Kamal as --destination flag'
@@ -13,3 +14,7 @@ inputs:
 runs:
   using: 'node20'
   main: 'index.js'
+
+branding:
+  icon: 'anchor'
+  color: 'blue'
