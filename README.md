@@ -31,7 +31,7 @@ This GitHub Action deploys your application using Kamal and handles cancellation
 ```yaml
 steps:
   - name: Kamal Deploy
-    uses: igor-alexandrov/kamal-deploy@v0.2.0
+    uses: igor-alexandrov/kamal-deploy@v0.2.1
     with:
       # environment: 'staging'  # Optional, only used if provided
       registry-username: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
@@ -40,4 +40,20 @@ steps:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       REDIS_URL: ${{ secrets.REDIS_URL }}
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+```
+
+## Development
+
+This action uses `@vercel/ncc` to bundle the source code and dependencies into a single file for distribution. Before publishing or committing updates to your action, you need to compile the code.
+
+### Installation
+
+```bash
+npm install @vercel/ncc --save-dev
+```
+
+### Compiling the Action
+
+```bash
+ncc build index.js --out dist
 ```

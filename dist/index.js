@@ -27547,6 +27547,7 @@ async function run() {
     const environment = core.getInput('environment');
     const registryUsername = core.getInput('registry-username', { required: true });
     const registryPassword = core.getInput('registry-password', { required: true });
+    const kamalPath = core.getInput('kamal-path') || './bin/kamal';
 
     core.exportVariable('KAMAL_REGISTRY_USERNAME', registryUsername);
     core.exportVariable('KAMAL_REGISTRY_PASSWORD', registryPassword);
@@ -27561,7 +27562,7 @@ async function run() {
     }
 
     // Execute the deployment command
-    await exec.exec('./bin/kamal', deployCommand);
+    await exec.exec(kamalPath, deployCommand);
 
     // Handle cancellation
     process.on('SIGINT', async () => {
@@ -27574,7 +27575,7 @@ async function run() {
           lockCommand.push(`--destination=${environment}`);
         }
 
-        await exec.exec('./bin/kamal', lockCommand);
+        await exec.exec(kamalPath, lockCommand);
         core.info('Kamal lock released successfully.');
       } catch (error) {
         core.setFailed(`Failed to release Kamal lock: ${error.message}`);
