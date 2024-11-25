@@ -22,10 +22,11 @@ This GitHub Action deploys your application using Kamal and handles cancellation
 | `environment`            | Optional deployment environment (e.g., `production`, `staging`). If omitted, the `--destination` flag is not passed. | No       | None        |
 | `registry-username`| Registry Username (e.g., Digital Ocean Access Token) | Yes      |             |
 | `registry-password`| Registry Password (e.g., Digital Ocean Access Token) | Yes      |             |
-
-> **Note:** Only `registry-username` and `registry-password` are required. Any other necessary configuration, such as `DATABASE_URL`, `REDIS_URL`, and `RAILS_MASTER_KEY`, should be provided as environment variables in the workflow file.
+| `kamal-path`             | Path to the Kamal binary file.                             | No       | `./bin/kamal` |
 
 ## Usage
+
+> **Note:** Only `registry-username` and `registry-password` are required. Any other necessary configuration, such as `DATABASE_URL`, `REDIS_URL`, and `RAILS_MASTER_KEY`, should be provided as environment variables in the workflow file.
 
 ```yaml
 steps:

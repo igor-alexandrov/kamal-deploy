@@ -11,6 +11,10 @@ inputs:
   registry-password:
     description: 'Registry password'
     required: true
+  kamal-path:
+    description: 'Path to the Kamal binary file'
+    required: false
+    default: './bin/kamal'
 runs:
   using: 'node20'
   main: 'dist/index.js'
