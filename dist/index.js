@@ -27541,13 +27541,15 @@ module.exports = parseParams
 var __webpack_exports__ = {};
 const core = __nccwpck_require__(1452);
 const exec = __nccwpck_require__(9204);
+const path = __nccwpck_require__(6928);
 
 async function run() {
   try {
     const environment = core.getInput('environment');
     const registryUsername = core.getInput('registry-username', { required: true });
     const registryPassword = core.getInput('registry-password', { required: true });
-    const kamalPath = core.getInput('kamal-path') || './bin/kamal';
+    const kamalPath = core.getInput('kamal-path');
+    const workdir = core.getInput('workdir');
 
     core.exportVariable('KAMAL_REGISTRY_USERNAME', registryUsername);
     core.exportVariable('KAMAL_REGISTRY_PASSWORD', registryPassword);
@@ -27561,8 +27563,11 @@ async function run() {
       deployCommand.push(`--destination=${environment}`);
     }
 
+    // Use the provided workdir
+    const cwd = path.resolve(workdir);
+
     // Execute the deployment command
-    await exec.exec(kamalPath, deployCommand);
+    await exec.exec(kamalPath, deployCommand, { cwd });
 
     // Handle cancellation
     process.on('SIGINT', async () => {
@@ -27575,7 +27580,7 @@ async function run() {
           lockCommand.push(`--destination=${environment}`);
         }
 
-        await exec.exec(kamalPath, lockCommand);
+        await exec.exec(kamalPath, lockCommand, { cwd });
         core.info('Kamal lock released successfully.');
       } catch (error) {
         core.setFailed(`Failed to release Kamal lock: ${error.message}`);

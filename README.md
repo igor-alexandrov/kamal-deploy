@@ -23,6 +23,7 @@ This GitHub Action deploys your application using Kamal and handles cancellation
 | `registry-username`| Registry Username (e.g., Digital Ocean Access Token) | Yes      |             |
 | `registry-password`| Registry Password (e.g., Digital Ocean Access Token) | Yes      |             |
 | `kamal-path`             | Path to the Kamal binary file.                             | No       | `./bin/kamal` |
+| `workdir`                | The working directory from which Kamal should be executed. | No       | `.`          |
 
 ## Usage
 
@@ -31,7 +32,7 @@ This GitHub Action deploys your application using Kamal and handles cancellation
 ```yaml
 steps:
   - name: Kamal Deploy
-    uses: igor-alexandrov/kamal-deploy@v0.2.1
+    uses: igor-alexandrov/kamal-deploy@v0.3.0
     with:
       # environment: 'staging'  # Optional, only used if provided
       registry-username: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
