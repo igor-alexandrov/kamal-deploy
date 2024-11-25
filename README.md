@@ -31,7 +31,7 @@ This GitHub Action deploys your application using Kamal and handles cancellation
 ```yaml
 steps:
   - name: Kamal Deploy
-    uses: igor-alexandrov/kamal-deploy@v0.1.3
+    uses: igor-alexandrov/kamal-deploy@v0.2.0
     with:
       # environment: 'staging'  # Optional, only used if provided
       registry-username: ${{ secrets.KAMAL_REGISTRY_USERNAME }}
