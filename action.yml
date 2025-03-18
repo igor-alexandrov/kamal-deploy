@@ -2,23 +2,32 @@ name: Kamal Deploy
 description: GitHub Action to build and deploy Docker image with Kamal
 
 inputs:
-  environment:
-    description: 'Application environment, will be passed to Kamal as --destination flag'
-    required: false
   registry-username:
     description: 'Registry username'
     required: true
   registry-password:
     description: 'Registry password'
     required: true
-  kamal-path:
-    description: 'Path to the Kamal binary file'
-    required: false
-    default: './bin/kamal'
   workdir:
     description: 'The working directory where Kamal will be executed'
     required: false
     default: '.'
+  kamal-path:
+    description: 'Path to the Kamal binary file'
+    required: false
+    default: './bin/kamal'
+    deprecationMessage:  '`kamal-path` is deprecated and will be removed in the next release. Use `kamal`` instead.'
+  kamal:
+    description: 'Path to the Kamal binary file'
+    required: false
+    default: './bin/kamal'
+  environment:
+    description: 'Application environment, will be passed to Kamal as --destination flag'
+    required: false
+  config:
+    description: 'Path to the Kamal configuration file'
+    required: false
+    default: './config/deploy.yml'
 
 runs:
   using: 'node20'

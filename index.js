@@ -4,11 +4,12 @@ const path = require('path');
 
 async function run() {
   try {
-    const environment = core.getInput('environment');
     const registryUsername = core.getInput('registry-username', { required: true });
     const registryPassword = core.getInput('registry-password', { required: true });
-    const kamalPath = core.getInput('kamal-path');
     const workdir = core.getInput('workdir');
+    const kamal = core.getInput('kamal');
+    const environment = core.getInput('environment');
+    const config = core.getInput('config');
 
     core.exportVariable('KAMAL_REGISTRY_USERNAME', registryUsername);
     core.exportVariable('KAMAL_REGISTRY_PASSWORD', registryPassword);
@@ -22,11 +23,16 @@ async function run() {
       deployCommand.push(`--destination=${environment}`);
     }
 
+    // Add the `--config` flag if config is provided
+    if (config) {
+      deployCommand.push(`--config=${config}`);
+    }
+
     // Use the provided workdir
     const cwd = path.resolve(workdir);
 
     // Execute the deployment command
-    await exec.exec(kamalPath, deployCommand, { cwd });
+    await exec.exec(kamal, deployCommand, { cwd });
 
     // Handle cancellation
     process.on('SIGINT', async () => {
@@ -39,7 +45,7 @@ async function run() {
           lockCommand.push(`--destination=${environment}`);
         }
 
-        await exec.exec(kamalPath, lockCommand, { cwd });
+        await exec.exec(kamal, lockCommand, { cwd });
         core.info('Kamal lock released successfully.');
       } catch (error) {
         core.setFailed(`Failed to release Kamal lock: ${error.message}`);
