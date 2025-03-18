@@ -24,7 +24,7 @@ This GitHub Action deploys your application using Kamal and handles cancellation
 | `workdir`                | The working directory from which Kamal should be executed. | No       | `.`          |
 | `kamal`             | Path to the Kamal binary file.                             | No       | `./bin/kamal` |
 | `environment`            | Optional deployment environment (e.g., `production`, `staging`). If omitted, the `--destination` flag is not passed. | No       | None        |
-| `config`            | Path to the Kamal config file. If omitted, the `--config` flag is not passed. | No       | `./config/deploy.yml`        |
+| `config-file` | Path to the Kamal config file. If omitted, the `--config-file` flag is not passed. | No       | `./config/deploy.yml`        |
 
 ## Usage
 
@@ -33,7 +33,7 @@ This GitHub Action deploys your application using Kamal and handles cancellation
 ```yaml
 steps:
   - name: Kamal Deploy
-    uses: igor-alexandrov/kamal-deploy@v0.4.0
+    uses: igor-alexandrov/kamal-deploy@v0.4.1
     with:
       # environment: 'staging'  # Optional, only used if provided
       registry-username: ${{ secrets.KAMAL_REGISTRY_USERNAME }}

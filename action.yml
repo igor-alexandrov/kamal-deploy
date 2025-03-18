@@ -24,7 +24,7 @@ inputs:
   environment:
     description: 'Application environment, will be passed to Kamal as --destination flag'
     required: false
-  config:
+  config-file:
     description: 'Path to the Kamal configuration file'
     required: false
     default: './config/deploy.yml'
